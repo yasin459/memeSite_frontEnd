@@ -2,20 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
 import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Zoom from "@material-ui/core/Zoom";
-
+import Meme from "./Card";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MemeMenu from "./memeMenu";
+import Grid from "@material-ui/core/Grid";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "fixed",
@@ -76,19 +74,41 @@ export default function BackToTop(props) {
           <Button>آپلود های من</Button>
         </Toolbar>
       </AppBar>
-      {/* <Toolbar id="back-to-top-anchor" /> */}
 
-      <Container>
-        <Box my={2}>
-          {[...new Array(12)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.t eros..`
-            )
-            .join("\n")}
-        </Box>
-      </Container>
+      <Grid
+        container
+        spacing={24}
+        style={{
+          padding: 15,
+          // gridAutoFlow: "column",
+        }}
+      >
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          lg={4}
+          xl={3}
+          // style={{ gridAutoFlow: "column" }}
+        >
+          <Meme />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Meme />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Meme />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Meme />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Meme />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Meme />
+        </Grid>
+      </Grid>
       <ScrollTop {...props}>
         <Fab color="secondary" size="large" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
