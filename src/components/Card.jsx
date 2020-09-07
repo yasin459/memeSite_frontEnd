@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Meme() {
+export default function Meme(props) {
   const classes = useStyles();
 
   return (
@@ -48,7 +48,7 @@ export default function Meme() {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            {props.avatar}
           </Avatar>
         }
         action={
@@ -56,19 +56,17 @@ export default function Meme() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={props.title}
+        subheader={props.uploader}
       />
       <CardMedia
         className={classes.media}
-        image={require("./1.jpg")}
+        image={props.myImg}
         title="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {props.body}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -78,15 +76,8 @@ export default function Meme() {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <IconButton
-          // className={clsx(classes.expand, {
-          //   [classes.expandOpen]: expanded,
-          // })}
-          // aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+        <Typography>{props.votePercent}</Typography>
+        <Typography>{props.voteNumber}</Typography>
       </CardActions>
     </Card>
   );
