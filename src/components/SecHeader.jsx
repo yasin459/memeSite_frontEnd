@@ -53,44 +53,35 @@ function ScrollTop(props) {
   );
 }
 
-ScrollTop.propTypes = {
-  children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
+// ScrollTop.propTypes = {
+//   children: PropTypes.element.isRequired,
+//   /**
+//    * Injected by the documentation to work in an iframe.
+//    * You won't need it on your project.
+//    */
+//   window: PropTypes.func,
+// };
 
 export default function BackToTop(props) {
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="relative">
-        <Toolbar>
+        <Toolbar id="back-to-top-anchor">
           <MemeMenu />
           <Button> دنبال کردنای من</Button>
           <Button>مورد علاقه ها</Button>
           <Button>آپلود های من</Button>
         </Toolbar>
       </AppBar>
-
       <Grid
         container
         spacing={24}
         style={{
           padding: 15,
-          // gridAutoFlow: "column",
         }}
       >
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          lg={4}
-          xl={3}
-          // style={{ gridAutoFlow: "column" }}
-        >
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
           <Meme />
         </Grid>
         <Grid item xs={12} sm={6} lg={4} xl={3}>
