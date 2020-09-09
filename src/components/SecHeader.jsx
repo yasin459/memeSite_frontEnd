@@ -14,6 +14,10 @@ import MemeMenu from "./memeMenu";
 import InputBase from "@material-ui/core/InputBase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MemeHolder from "./memeHolder";
+import { Grid } from "@material-ui/core";
+
+import Meme from "./Card";
+
 const useStyles = makeStyles((theme) => ({
   search: {
     position: "absolute",
@@ -120,19 +124,20 @@ function BarMenu(props) {
 }
 
 export default class BackToTop extends React.Component {
-  state = {};
+  state = { name: "first" };
   render() {
     return (
       <Router>
         <BarMenu />
         <MemeHolder handleClick={this.printMeme} />
-        {this.state.name}
+        {/* {this.state.name} */}
         <ScrollTop {...this.props} />
       </Router>
     );
   }
-  printMeme = (salam) => {
-    this.setState({ name: salam });
-    // console.log(salam);
+  printMeme = () => {
+    // console.log("start");
+    this.setState({ name: "jhggy" });
+    console.log("log: ", this.state);
   };
 }
