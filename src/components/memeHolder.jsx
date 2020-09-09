@@ -16,8 +16,7 @@ class MemeHolder extends Component {
       >
         <Switch>
           <Route path="/subscriptions"></Route>
-
-          <Route path="/favorites"></Route>
+          <Route path="/favorites">{this.changeMeme}</Route>
           <Route path="/myUploads"></Route>
           <Route path="/latestMemes"></Route>
           <Route path="/bestMemes/day"></Route>
@@ -43,6 +42,9 @@ class MemeHolder extends Component {
       </Grid>
     );
   }
+  changeMeme = () => {
+    this.props.handleClick("paashmmmmmaaaam");
+  };
 }
 
 export default MemeHolder;

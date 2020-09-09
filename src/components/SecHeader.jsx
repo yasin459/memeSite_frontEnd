@@ -58,7 +58,7 @@ function ScrollTop(props) {
     threshold: 100,
   });
 
-  const handleClick = (event) => {
+  const backToTopClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
       "#back-to-top-anchor"
     );
@@ -70,18 +70,22 @@ function ScrollTop(props) {
 
   return (
     <Zoom in={trigger}>
-      <div onClick={handleClick} role="presentation" className={classes.root}>
-        {children}
+      <div
+        onClick={backToTopClick}
+        role="presentation"
+        className={classes.root}
+      >
+        <Fab color="secondary" size="large" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
       </div>
     </Zoom>
   );
 }
-
-export default function BackToTop(props) {
+function BarMenu(props) {
   const classes = useStyles();
-
   return (
-    <Router>
+    <React.Fragment>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar id="back-to-top-anchor">
@@ -106,18 +110,29 @@ export default function BackToTop(props) {
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
+              // onChange={() => printMeme(props.memes)}
             />
           </div>
         </Toolbar>
       </AppBar>
-
-      <MemeHolder />
-
-      <ScrollTop {...props}>
-        <Fab color="secondary" size="large" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
-    </Router>
+    </React.Fragment>
   );
+}
+
+export default class BackToTop extends React.Component {
+  state = {};
+  render() {
+    return (
+      <Router>
+        <BarMenu />
+        <MemeHolder handleClick={this.printMeme} />
+        {this.state.name}
+        <ScrollTop {...this.props} />
+      </Router>
+    );
+  }
+  printMeme = (salam) => {
+    this.setState({ name: salam });
+    // console.log(salam);
+  };
 }
