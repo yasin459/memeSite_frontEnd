@@ -1,4 +1,6 @@
-import React from "react";
+import { PureComponent, Component } from "react";
+import * as React from "react";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
@@ -88,21 +90,21 @@ function ScrollTop(props) {
 }
 function BarMenu(props) {
   const classes = useStyles();
+
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar id="back-to-top-anchor">
-          <MemeMenu />
-          <Button>
-            <Link to="/subscriptions">دنبال کردنای من</Link>
+          <MemeMenu showMeme={props.showMeme} />
+          <Button onClick={() => props.showMeme("subscribe")}>
+            دنبال کردن های من
           </Button>
-          <Button>
-            <Link to="/favorites">مورد علاقه ها</Link>
+          <Button onClick={() => props.showMeme("myMeme")}>میم های من</Button>
+          <Button onClick={() => props.showMeme("favorites")}>
+            مورد علاقه ها
           </Button>
-          <Button>
-            <Link to="/myUploads">آپلود های من</Link>
-          </Button>
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -123,21 +125,35 @@ function BarMenu(props) {
   );
 }
 
-export default class BackToTop extends React.Component {
-  state = { name: "first" };
+export default class BackToTop extends Component {
+  constructor() {
+    super();
+
+    this.state = { name: "first" };
+  }
+
   render() {
     return (
       <Router>
-        <BarMenu />
-        <MemeHolder handleClick={this.printMeme} />
-        {/* {this.state.name} */}
+        <BarMenu showMeme={this.ShowMeme} />
+
+        <Grid
+          container
+          spacing={24}
+          style={{
+            padding: 15,
+          }}
+        >
+          <p>{this.state.name}</p>
+        </Grid>
         <ScrollTop {...this.props} />
       </Router>
     );
   }
-  printMeme = () => {
-    // console.log("start");
-    this.setState({ name: "jhggy" });
-    console.log("log: ", this.state);
+
+  ShowMeme = (props) => {
+    this.setState({
+      name: props,
+    });
   };
 }
