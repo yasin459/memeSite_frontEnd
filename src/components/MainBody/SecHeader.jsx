@@ -15,10 +15,10 @@ import { fade } from "@material-ui/core/styles";
 import MemeMenu from "./memeMenu";
 import InputBase from "@material-ui/core/InputBase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import MemeHolder from "./memeHolder";
+import MemeHolder from "../memeHolder";
 import { Grid } from "@material-ui/core";
 
-import Meme from "./Card";
+import Meme from "../MemeCard/Card";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -116,7 +116,7 @@ function BarMenu(props) {
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
-              // onChange={() => printMeme(props.memes)}
+              onChange={(e) => props.search(e)}
             />
           </div>
         </Toolbar>
@@ -135,17 +135,8 @@ export default class BackToTop extends Component {
   render() {
     return (
       <Router>
-        <BarMenu showMeme={this.ShowMeme} />
-
-        <Grid
-          container
-          spacing={24}
-          style={{
-            padding: 15,
-          }}
-        >
-          <p>{this.state.name}</p>
-        </Grid>
+        <BarMenu search={this.search} showMeme={this.ShowMeme} />
+        <this.Comp text={this.state.name} />
         <ScrollTop {...this.props} />
       </Router>
     );
@@ -155,5 +146,15 @@ export default class BackToTop extends Component {
     this.setState({
       name: props,
     });
+  };
+  search = (event) => {
+    console.log("salam");
+  };
+  Comp = (props) => {
+    if (props.text === "subscribe") {
+      return <div>gheif</div>;
+    } else if (2 === 2) {
+      return <div>{props.text}</div>;
+    }
   };
 }

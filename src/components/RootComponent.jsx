@@ -1,9 +1,9 @@
 import React from "react";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import BackToTop from "./SecHeader";
-import MainHeader from "./Header";
+import BackToTop from "./MainBody/SecHeader";
+import MainHeader from "./TopHeader/Header";
 import RTL from "../RTL";
-import Footer from "./Footer";
+import Footer from "./Footer/Footer";
 const theme = createMuiTheme({
   direction: "rtl",
 });
