@@ -11,6 +11,7 @@ import { Box, Button, Container } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    margin: 3,
   },
   paper: {
     padding: theme.spacing(2),
@@ -29,11 +30,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CommentPaper() {
+export default function CommentPaper(props) {
   const classes = useStyles();
+  var x = parseInt(props.padding, 10);
+  x = x + 100;
+  x += "px";
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{ marginLeft: x }}>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>

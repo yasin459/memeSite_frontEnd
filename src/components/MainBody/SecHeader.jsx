@@ -16,11 +16,12 @@ import MemeMenu from "./memeMenu";
 import InputBase from "@material-ui/core/InputBase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MemeHolder from "../memeHolder";
-import { Grid } from "@material-ui/core";
+import { Box, Grid, Container } from "@material-ui/core";
 import NestedList from "../MemeCard/Comment";
 import Meme from "../MemeCard/Card";
 import { useRef } from "react";
 import CommentPaper from "../MemeCard/Comment";
+import CardExpanded from "../MemeCard/CardExpanded";
 const useStyles = makeStyles((theme) => ({
   search: {
     position: "absolute",
@@ -137,8 +138,7 @@ export default class BackToTop extends Component {
     return (
       <Router>
         <BarMenu search={this.search} showMeme={this.ShowMeme} />
-        <CommentPaper />
-        <CommentPaper />
+        <CardExpanded />
         <this.Comp text={this.state.name} />
         <ScrollTop {...this.props} />
       </Router>
@@ -161,3 +161,4 @@ export default class BackToTop extends Component {
     }
   };
 }
+const expandedClicked = (props) => {};
