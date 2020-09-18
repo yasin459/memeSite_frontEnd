@@ -12,6 +12,7 @@ import {
   SearchBar,
   makeStyles,
 } from "@material-ui/core";
+import Login from "../login/loginModal";
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
@@ -42,7 +43,8 @@ export default function MainHeader(props) {
         <Typography>meme site</Typography>
 
         <div className={classes.leftGroup}>
-          <Button>ورورد/ثبت نام</Button>
+          {/* <Button onClick={() => <Login />}>ورورد/ثبت نام</Button> */}
+          <Login />
           <CloudUploadOutlinedIcon />
         </div>
       </Toolbar>
