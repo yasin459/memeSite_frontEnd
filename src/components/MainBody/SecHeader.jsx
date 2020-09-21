@@ -1,6 +1,5 @@
-import { PureComponent, Component } from "react";
+import { useState, PureComponent, Component } from "react";
 import * as React from "react";
-
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,6 +18,7 @@ import MemeHolder from "../memeHolder";
 import { Box, Grid, Container } from "@material-ui/core";
 import NestedList from "../MemeCard/Comment";
 import Meme from "../MemeCard/Card";
+
 import { useRef } from "react";
 import CommentPaper from "../MemeCard/Comment";
 import CardExpanded from "../MemeCard/CardExpanded";
@@ -131,34 +131,121 @@ export default class BackToTop extends Component {
   constructor() {
     super();
 
-    this.state = { name: "first" };
+    this.state = {
+      memeShower: true,
+      memes: [
+        {
+          id: "1",
+          author: "yasin",
+          avatar: "avatar",
+          title: "title",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+        },
+        {
+          id: "1",
+          author: "yasin",
+          avatar: "avatar",
+          title: "title",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+        },
+        {
+          id: "1",
+          author: "yasin",
+          avatar: "avatar",
+          title: "title",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+        },
+        {
+          id: "1",
+          author: "yasin",
+          avatar: "avatar",
+          title: "title",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+        },
+        {
+          id: "1",
+          author: "yasin",
+          avatar: "avatar",
+          title: "title",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+        },
+        {
+          id: "1",
+          author: "yasin",
+          avatar: "avatar",
+          title: "title",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+        },
+        {
+          id: "1",
+          author: "yasin",
+          avatar: "avatar",
+          title: "title",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+        },
+      ],
+    };
   }
 
   render() {
     return (
       <Router>
         <BarMenu search={this.search} showMeme={this.ShowMeme} />
-        <CardExpanded />
-        <this.Comp text={this.state.name} />
+
+        {!this.state.memeShower && (
+          <CardExpanded chosedMeme={this.state.chosedMeme} />
+        )}
+        {!this.state.memeShower && console.log("successful")}
+        {this.state.memeShower && (
+          <div>
+            <Grid container style={{ justifyContent: "center" }}>
+              {this.state.memes.map((meme) => (
+                <Grid item xs={12} sm={6} lg={4}>
+                  <Meme
+                    onClick={() => this.setChosedMeme(meme)}
+                    likes={meme.likes}
+                    body={meme.body}
+                    title={meme.title}
+                    author={meme.author}
+                    img={meme.img}
+                    avatar={meme.avatar}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        )}
         <ScrollTop {...this.props} />
       </Router>
     );
   }
-
-  ShowMeme = (props) => {
+  setChosedMeme = (meme) => {
+    this.setState({ chosedMeme: meme });
+    this.ChangeView(false);
+  };
+  ChangeView = (props) => {
     this.setState({
-      name: props,
+      memeShower: props,
     });
+  };
+  ShowMeme = (props) => {
+    this.ChangeView(true);
   };
   search = (event) => {
     console.log("salam");
   };
-  Comp = (props) => {
-    if (props.text === "subscribe") {
-      return <div>gheif</div>;
-    } else if (2 === 2) {
-      return <div>{props.text}</div>;
-    }
-  };
 }
-const expandedClicked = (props) => {};

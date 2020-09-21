@@ -21,22 +21,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
   const [view, setVeiw] = useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleOpen = () => {
+    props.changeLoggedIn();
     setOpen(true);
   };
 
   const handleClose = () => {
+    props.closeParentSwitch();
     setOpen(false);
   };
   const InOrUp = () => {
     return (
       <div>
-        {!view && <SignUp changeView={changeView} />}
-        {view && <SignIn changeView={changeView} />}
+        {!view && (
+          <SignUp
+            changeLoggedIn={props.changeLoggedIn}
+            changeView={changeView}
+          />
+        )}
+        {view && (
+          <SignIn
+            changeLoggedIn={props.changeLoggedIn}
+            changeView={changeView}
+          />
+        )}
       </div>
     );
   };
@@ -45,7 +57,6 @@ export default function Login() {
   };
   return (
     <div>
-      <Button onClick={handleOpen}>ورود/ثبت نام </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

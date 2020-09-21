@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: "5%",
     marginRight: "5%",
-    // width: 500,
-    maxWidth: 600,
+
+    maxWidth: 1000,
     margin: 7,
     alignItems: "center",
   },
@@ -29,16 +29,6 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: "70.25%", // 16:9
   },
-  // expand: {
-  //   transform: "rotate(0deg)",
-  //   marginLeft: "auto",
-  //   transition: theme.transitions.create("transform", {
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
-  // },
-  // expandOpen: {
-  //   transform: "rotate(180deg)",
-  // },
   avatar: {
     backgroundColor: red[500],
   },
@@ -47,8 +37,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Meme(props) {
   const classes = useStyles();
 
+  const handleIconButtonClicked = (e) => {
+    e.stopPropagation();
+    console.log("icon cliked");
+  };
+  // const pic = props.img;
   return (
-    <Card className={classes.root}>
+    <Card onClick={props.onClick} className={classes.root}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
@@ -61,11 +56,11 @@ export default function Meme(props) {
           </IconButton>
         }
         title={props.title}
-        subheader={props.uploader}
+        subheader={props.author}
       />
       <CardMedia
         className={classes.media}
-        image={props.myImg}
+        image={props.img}
         title="Paella dish"
       />
       <CardContent>
@@ -74,14 +69,16 @@ export default function Meme(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton
+          onClick={handleIconButtonClicked}
+          aria-label="add to favorites"
+        >
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <Typography>{props.votePercent}</Typography>
-        <Typography>{props.voteNumber}</Typography>
+        <Typography>{props.likes}</Typography>
       </CardActions>
     </Card>
   );

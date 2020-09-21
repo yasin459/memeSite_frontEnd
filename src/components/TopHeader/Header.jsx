@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import CloudUploadOutlinedIcon from "@material-ui/icons/CloudUploadOutlined";
+import React, { Component, useState } from "react";
+
 import {
   AppBar,
   Box,
@@ -13,7 +13,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import Login from "../login/loginModal";
-
+import UploaderModal from "./Uploader";
+import Uploader from "./Uploader";
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: "inherit",
@@ -37,15 +38,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function MainHeader(props) {
   const classes = useStyles();
+  const [loginIconSwitch, setLoginIconSwitch] = useState(false);
+  const changeLoginIconSwitch = () => setLoginIconSwitch(!loginIconSwitch);
+
   return (
     <AppBar position="sticky">
       <Toolbar>
         <Typography>meme site</Typography>
 
         <div className={classes.leftGroup}>
-          {/* <Button onClick={() => <Login />}>ورورد/ثبت نام</Button> */}
-          <Login />
-          <CloudUploadOutlinedIcon />
+          {!props.loggedIn && (
+            <Button onClick={changeLoginIconSwitch}>ورود/ثبت نام </Button>
+          )}
+          {!props.loggedIn && loginIconSwitch && (
+            <Login
+              changeLoggedIn={props.changeLoggedIn}
+              closeParentSwitch={changeLoginIconSwitch}
+            />
+          )}
+          <UploaderModal
+            changeLoggedIn={props.changeLoggedIn}
+            loggedIn={props.loggedIn}
+          />
         </div>
       </Toolbar>
     </AppBar>

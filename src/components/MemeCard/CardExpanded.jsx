@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "min-content" /* needs vendor prefixes */,
   },
 }));
-export default function CardExpanded(props) {
+export default function CardExpanded({ chosedMeme }, ...props) {
   const styles = useStyles();
   const x = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [jsons, setJsons] = useState([
@@ -70,27 +70,21 @@ export default function CardExpanded(props) {
   return (
     <React.Fragment>
       <Grid container style={{ justifyContent: "center" }}>
-        <Grid item xs={12} sm={8} md={6}>
+        <Grid item lg={7} sm={10} md={9} xs={12}>
           <Meme
-            voteNumber="12"
-            votePercent="97%"
-            body="dofnkgddnfkjd"
-            title="title   title"
-            uploader="uploooooader"
-            myImg={require("../1.jpg")}
-            avatar="rt"
+            likes={chosedMeme.likes}
+            body={chosedMeme.body}
+            title={chosedMeme.title}
+            author={chosedMeme.author}
+            img={chosedMeme.img}
+            avatar={chosedMeme.avatar}
           />
         </Grid>
       </Grid>
 
-      <Container
-        style={{
-          alignItems: "center",
-          justify: "center",
-        }}
-      >
+      <Box style={{ marginLeft: "5%", marginRight: "2%" }}>
         <ArrangeComments options={jsons} />
-      </Container>
+      </Box>
     </React.Fragment>
   );
 }
@@ -101,7 +95,13 @@ const ArrangeComments = ({ options }) => {
       {options &&
         options.map((option) => (
           <ul>
-            <CommentPaper />
+            <CommentPaper
+              title={option.title}
+              body={option.body}
+              likes={option.likes}
+              author={option.author}
+              date={option.date}
+            />
             {option.children.length > 0 && (
               <ArrangeComments options={option.children} />
             )}

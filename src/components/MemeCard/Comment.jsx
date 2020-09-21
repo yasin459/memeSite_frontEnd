@@ -42,18 +42,14 @@ export default function CommentPaper(props) {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <img
-                className={classes.img}
-                alt="authorPic"
-                src="/static/images/grid/complex.jpg"
-              />
+              <img className={classes.img} alt="authorPic" src={props.img} />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={3}>
               <Grid item xs>
                 <Typography gutterBottom variant="h5">
-                  title
+                  {props.title}
                 </Typography>
                 <Typography
                   onClick={() => printShet("salam")}
@@ -61,10 +57,10 @@ export default function CommentPaper(props) {
                   color="textSecondary"
                   style={{ cursor: "pointer" }}
                 >
-                  author id
+                  {props.author}
                 </Typography>
                 <Typography variant="body1" gutterBottom>
-                  body
+                  {props.body}
                 </Typography>
               </Grid>
               <Grid item>
@@ -91,7 +87,7 @@ export default function CommentPaper(props) {
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography>12</Typography>
+                <Typography>{props.likes}</Typography>
               </Grid>
 
               <Grid item>
