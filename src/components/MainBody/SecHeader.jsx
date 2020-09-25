@@ -135,67 +135,73 @@ export default class BackToTop extends Component {
       memeShower: true,
       memes: [
         {
-          id: "1",
+          id: "11",
+          author: "yasin",
+
+          avatar: "avatar",
+          title: "111",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+          searchKey: true,
+        },
+        {
+          id: "21",
           author: "yasin",
           avatar: "avatar",
-          title: "title",
+          title: "2222",
           body: "body",
           img: "../1.jpg",
           likes: "10",
         },
         {
-          id: "1",
+          id: "31",
           author: "yasin",
           avatar: "avatar",
-          title: "title",
+          title: "33333",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+          searchKey: true,
+        },
+        {
+          id: "41",
+          author: "yasin",
+          avatar: "avatar",
+          title: "4444",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+          searchKey: true,
+        },
+        {
+          id: "51",
+          author: "yasin",
+          avatar: "avatar",
+          title: "5555",
+          body: "body",
+          img: "../1.jpg",
+          likes: "10",
+          searchKey: true,
+        },
+        {
+          id: "61",
+          author: "yasin",
+          avatar: "avatar",
+          title: "66666",
           body: "body",
           img: "../1.jpg",
           likes: "10",
         },
         {
-          id: "1",
+          id: "7",
           author: "yasin",
           avatar: "avatar",
-          title: "title",
+          title: "77777",
           body: "body",
           img: "../1.jpg",
           likes: "10",
-        },
-        {
-          id: "1",
-          author: "yasin",
-          avatar: "avatar",
-          title: "title",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-        },
-        {
-          id: "1",
-          author: "yasin",
-          avatar: "avatar",
-          title: "title",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-        },
-        {
-          id: "1",
-          author: "yasin",
-          avatar: "avatar",
-          title: "title",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-        },
-        {
-          id: "1",
-          author: "yasin",
-          avatar: "avatar",
-          title: "title",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
+          searchKey: true,
         },
       ],
     };
@@ -213,19 +219,21 @@ export default class BackToTop extends Component {
         {this.state.memeShower && (
           <div>
             <Grid container style={{ justifyContent: "center" }}>
-              {this.state.memes.map((meme) => (
-                <Grid item xs={12} sm={6} lg={4}>
-                  <Meme
-                    onClick={() => this.setChosedMeme(meme)}
-                    likes={meme.likes}
-                    body={meme.body}
-                    title={meme.title}
-                    author={meme.author}
-                    img={meme.img}
-                    avatar={meme.avatar}
-                  />
-                </Grid>
-              ))}
+              {this.state.memes
+                .filter((filtered) => filtered.searchKey === true)
+                .map((meme) => (
+                  <Grid item xs={12} sm={6} lg={4}>
+                    <Meme
+                      onClick={() => this.setChosedMeme(meme)}
+                      likes={meme.likes}
+                      body={meme.body}
+                      title={meme.title}
+                      author={meme.author}
+                      img={meme.img}
+                      avatar={meme.avatar}
+                    />
+                  </Grid>
+                ))}
             </Grid>
           </div>
         )}
@@ -246,6 +254,16 @@ export default class BackToTop extends Component {
     this.ChangeView(true);
   };
   search = (event) => {
-    console.log("salam");
+    var temp = this.state.memes;
+    var meme;
+    for (meme of temp) {
+      console.log(meme);
+      if (meme.title.includes(event.target.value)) {
+        meme.searchKey = true;
+      } else {
+        meme.searchKey = false;
+      }
+    }
+    this.setState({ memes: temp });
   };
 }
