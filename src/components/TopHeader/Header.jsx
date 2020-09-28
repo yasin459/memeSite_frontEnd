@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-
+import axios from "axios";
 import {
   AppBar,
   Box,
@@ -32,8 +32,10 @@ const useStyles = makeStyles((theme) => ({
   leftGroup: {
     position: "absolute",
     display: "flex",
-    left: "10px",
-    marginLeft: "100px",
+    left: "0",
+  },
+  toolbar: {
+    backgroundColor: theme.primary.main,
   },
 }));
 export default function MainHeader(props) {
@@ -43,7 +45,7 @@ export default function MainHeader(props) {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <Typography>meme site</Typography>
 
         <div className={classes.leftGroup}>

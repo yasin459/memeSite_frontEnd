@@ -1,7 +1,9 @@
 import { makeStyles, Grid, Box, Container } from "@material-ui/core";
-import React, { Component, useState } from "react";
+import Axios from "axios";
+import React, { Component, useEffect, useState } from "react";
 import Meme from "./Card";
 import CommentPaper from "./Comment";
+import CommentUploader from "./uploadComment";
 const useStyles = makeStyles((theme) => ({
   fixTry1: {
     width: "40%",
@@ -17,56 +19,26 @@ const useStyles = makeStyles((theme) => ({
 
     minHeight: "min-content" /* needs vendor prefixes */,
   },
+  box: {
+    margin: "5%",
+    padding: "1%",
+
+    // backgroundColor: theme.primary.dark,
+  },
 }));
 export default function CardExpanded({ chosedMeme }, ...props) {
   const styles = useStyles();
   const x = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const [jsons, setJsons] = useState([
-    {
-      id: "1",
-      title: "firstcommeent title",
-      body: "dsdsd",
-      author: "fadfdaf",
-      date: "sfkndad",
-      children: [
-        {
-          id: "11",
-          title: "firstcommeent title",
-          body: "dsdsd",
-          author: "fadfdaf",
-          date: "sfkndad",
-          children: [],
-        },
-        {
-          id: "12",
-          title: "firstcommeent title",
-          body: "dsdsd",
-          author: "fadfdaf",
-          date: "sfkndad",
-          children: [],
-        },
-        {
-          id: "13",
-          title: "firstcommeent title",
-          body: "dsdsd",
-          author: "fadfdaf",
-          date: "sfkndad",
-          children: [
-            {
-              id: "131",
-              title: "firstcommeent title",
-              body: "dsdsd",
-              author: "fadfdaf",
-              date: "sfkndad",
-              children: [],
-            },
-          ],
-        },
-      ],
-    },
-  ]);
+  const [comments, setComments] = useState([]);
   // console.log("padadsad  ", jsons);
-
+  const getComments = () => {
+    // chosedmeme.id
+    Axios.get("http://localhost:3000/cardComments").then((res) => {
+      setComments(res.data);
+    });
+  };
+  useEffect(() => getComments(), []);
+  // getComments();
   return (
     <React.Fragment>
       <Grid container style={{ justifyContent: "center" }}>
@@ -78,12 +50,18 @@ export default function CardExpanded({ chosedMeme }, ...props) {
             author={chosedMeme.author}
             img={chosedMeme.img}
             avatar={chosedMeme.avatar}
+            id={chosedMeme.id}
+            increaseLikes={chosedMeme.increaseLikes}
           />
         </Grid>
       </Grid>
 
-      <Box style={{ marginLeft: "5%", marginRight: "2%" }}>
-        <ArrangeComments options={jsons} />
+      <Box className={styles.box}>
+        <ul>
+          <CommentUploader />
+        </ul>
+
+        <ArrangeComments options={comments} />
       </Box>
     </React.Fragment>
   );

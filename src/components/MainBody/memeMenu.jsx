@@ -43,7 +43,7 @@ export default function MemeMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => props.showMeme("newestMeme")}>
+        <MenuItem onClick={() => props.showMeme("last")}>
           جدید ترین میم ها
         </MenuItem>
 
@@ -64,25 +64,21 @@ export default function MemeMenu(props) {
             anchorOrigin={{ vertical: "center", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "right" }}
           >
-            <MenuItem onClick={() => props.showMeme("bestMemeDay")}>
+            <MenuItem onClick={() => props.showMeme("top/day")}>
               بهترین روز
             </MenuItem>
 
-            <MenuItem onClick={() => props.showMeme("bestMemeWeek")}>
-              {" "}
+            <MenuItem onClick={() => props.showMeme("top/week")}>
               بهترین هفته
             </MenuItem>
 
-            <MenuItem onClick={() => props.showMeme("bestMemeEver")}>
-              {" "}
+            <MenuItem onClick={() => props.showMeme("top/ever")}>
               بهترین از ابتدا
             </MenuItem>
           </Menu>
         </MenuItem>
 
-        <MenuItem onClick={() => props.showMeme("randomMeme")}>
-          میم رندوم
-        </MenuItem>
+        <MenuItem onClick={() => props.showMeme("random")}>میم رندوم</MenuItem>
       </Menu>
     </React.Fragment>
   );

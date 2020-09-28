@@ -1,0 +1,179 @@
+{
+  "comments": [
+    {
+      "id": "11",
+      "author": "yasin",
+
+      "avatar": "avatar",
+      "title": "111",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "21",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "2222",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10"
+    },
+    {
+      "id": "31",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "33333",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "41",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "4444",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "51",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "5555",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "61",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "66666",
+      "body": "bodggggggggggggggggggg ggggggggggggggggggggggggggggg gggggggggggggggggggggggggg gggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggggggg ggggggggggggggggggggggggggg gggggggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggggggggggggggg gggggggggggggggggggggggggy",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "7",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "77777",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+
+    {
+      "id": "7",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "77777",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "7",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "77777",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "7",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "77777",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "7",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "77777",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    },
+    {
+      "id": "7",
+      "author": "yasin",
+      "avatar": "avatar",
+      "title": "77777",
+      "body": "body",
+      "img": "../1.jpg",
+      "likes": "10",
+      "searchKey": true
+    }
+  ],
+  "cardComments": [
+    {
+      "id": "1",
+      "title": "firstcommeent title",
+      "body": "dsdsd",
+      "author": "fadfdaf",
+      "date": "sfkndad",
+      "children": [
+        {
+          "id": "11",
+          "title": "firstcommeent title",
+          "body": "dsdsd",
+          "author": "fadfdaf",
+          "date": "sfkndad",
+          "children": []
+        },
+        {
+          "id": "12",
+          "title": "firstcommeent title",
+          "body": "dsdsd",
+          "author": "fadfdaf",
+          "date": "sfkndad",
+          "children": []
+        },
+        {
+          "id": "13",
+          "title": "firstcommeent title",
+          "body": "dsdsd dsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsdd sdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsd dsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsdds dsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsdds dsddsdsddsdsddsdsddsdsddsdsddsdsddsds ddsdsddsdsddsdsddsdsddsdsddsdsddsds ddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsd sddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsdsddsds ddsdsddsdsddsdsddsdsddsdsdds dsddsdsddsdsddsdsddsdsddsdsd dsdsddsdsddsdsddsdsd dsdsddsdsddsdsddsdsddsdsddsdsddsdsd dsd sddsdsddsdsddsdsddsdsddsdsddsdsddsdsd dsdsddsdsddsdsd",
+          "author": "fadfdaf",
+          "date": "sfkndad",
+          "children": [
+            {
+              "id": "131",
+              "title": "firstcommeent title",
+              "body": "dsdsd",
+              "author": "fadfdaf",
+              "date": "sfkndad",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

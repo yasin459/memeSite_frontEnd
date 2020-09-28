@@ -14,8 +14,11 @@ const useStyles = makeStyles((theme) => ({
     margin: 3,
   },
   paper: {
-    padding: theme.spacing(2),
-    margin: "auto",
+    backgroundColor: theme.primary.main,
+
+    // padding: theme.spacing(2),
+    marginTop: "10px",
+    marginBottom: "10px",
     // maxWidth: 500,
   },
   image: {
@@ -27,6 +30,23 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     maxWidth: "100%",
     maxHeight: "100%",
+  },
+  body: {
+    borderRadius: "5px",
+    "& > *": {
+      margin: "3px",
+    },
+    // backgroundColor: theme.primary.light,
+    // backgroundColor: "#c63f17",
+  },
+  voteBox: {
+    display: "flex",
+    flexDirection: "column",
+
+    alignItems: "center",
+    justifyContent: "center",
+
+    padding: "5px",
   },
 }));
 
@@ -45,57 +65,50 @@ export default function CommentPaper(props) {
               <img className={classes.img} alt="authorPic" src={props.img} />
             </ButtonBase>
           </Grid>
-          <Grid item xs={12} sm container>
+          <Grid className={classes.body} item xs={12} sm container>
             <Grid item xs container direction="column" spacing={3}>
               <Grid item xs>
-                <Typography gutterBottom variant="h5">
-                  {props.title}
-                </Typography>
                 <Typography
                   onClick={() => printShet("salam")}
-                  variant="body2"
+                  variant="caption"
                   color="textSecondary"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: "white" }}
                 >
                   {props.author}
                 </Typography>
-                <Typography variant="body1" gutterBottom>
+              </Grid>
+              <Grid item xs>
+                <Typography
+                  variant="body1"
+                  gutterBottom
+                  style={{ color: "white" }}
+                >
                   {props.body}
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography
-                  // component="button"
-                  variant="body2"
-                  style={{ cursor: "pointer" }}
+                  variant="subtitle1"
+                  style={{ cursor: "pointer", color: "white" }}
                 >
                   reply
                 </Typography>
               </Grid>
             </Grid>
-            <Grid
-              item
-              container
-              xs={1}
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item>
-                <Typography>
-                  <ArrowDropUpIcon />
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography>{props.likes}</Typography>
-              </Grid>
 
-              <Grid item>
-                <Typography gutterBottom>
-                  <ArrowDropDownIcon />
+            <Box className={classes.voteBox}>
+              <Box className={classes.voteBox}>
+                <Typography justify="center">
+                  <ArrowDropUpIcon style={{ color: "white" }} />
                 </Typography>
-              </Grid>
-            </Grid>
+                <Typography justify="center" style={{ color: "white" }}>
+                  {props.likes} 12
+                </Typography>
+                <Typography justify="center">
+                  <ArrowDropDownIcon style={{ color: "white" }} />
+                </Typography>
+              </Box>
+            </Box>
           </Grid>
         </Grid>
       </Paper>

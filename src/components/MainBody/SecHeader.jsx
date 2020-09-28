@@ -13,19 +13,19 @@ import SearchIcon from "@material-ui/icons/Search";
 import { fade } from "@material-ui/core/styles";
 import MemeMenu from "./memeMenu";
 import InputBase from "@material-ui/core/InputBase";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import MemeHolder from "../memeHolder";
-import { Box, Grid, Container } from "@material-ui/core";
-import NestedList from "../MemeCard/Comment";
+import CommentUploader from "../MemeCard/uploadComment";
+import { FormControlLabel, Checkbox, Grid } from "@material-ui/core";
+
 import Meme from "../MemeCard/Card";
 
-import { useRef } from "react";
-import CommentPaper from "../MemeCard/Comment";
 import CardExpanded from "../MemeCard/CardExpanded";
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   search: {
     position: "absolute",
-    left: "0",
+    // position: "relative",
+
+    left: "5%",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -37,6 +37,19 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
       width: "auto",
+    },
+  },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
     },
   },
   searchIcon: {
@@ -54,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+  },
+  toolbar: {
+    backgroundColor: theme.secondary.main,
   },
 }));
 
@@ -92,22 +108,33 @@ function ScrollTop(props) {
 }
 function BarMenu(props) {
   const classes = useStyles();
-
+  const handleCheckBox = (e) => {
+    if (e.target.checked) {
+      console.log("checkbox");
+    }
+  };
   return (
     <React.Fragment>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <AppBar position="relative">
-        <Toolbar id="back-to-top-anchor">
+        <Toolbar className={classes.toolbar} id="back-to-top-anchor">
           <MemeMenu showMeme={props.showMeme} />
           <Button onClick={() => props.showMeme("subscribe")}>
             دنبال کردن های من
           </Button>
           <Button onClick={() => props.showMeme("myMeme")}>میم های من</Button>
-          <Button onClick={() => props.showMeme("favorites")}>
+          <Button onClick={() => props.showMeme("favorite")}>
             مورد علاقه ها
           </Button>
 
           <div className={classes.search}>
+            <FormControlLabel
+              control={
+                <Checkbox onChange={(e) => handleCheckBox(e)} name="checkedA" />
+              }
+              // style={{ backgroundColor: "red" }}
+              label="جستجو در همه"
+            />
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -117,6 +144,7 @@ function BarMenu(props) {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              style={{ marginRight: "10px" }}
               inputProps={{ "aria-label": "search" }}
               onChange={(e) => props.search(e)}
             />
@@ -130,92 +158,22 @@ function BarMenu(props) {
 export default class BackToTop extends Component {
   constructor() {
     super();
-
+    this.getMemes("last");
     this.state = {
       memeShower: true,
-      memes: [
-        {
-          id: "11",
-          author: "yasin",
-
-          avatar: "avatar",
-          title: "111",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-          searchKey: true,
-        },
-        {
-          id: "21",
-          author: "yasin",
-          avatar: "avatar",
-          title: "2222",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-        },
-        {
-          id: "31",
-          author: "yasin",
-          avatar: "avatar",
-          title: "33333",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-          searchKey: true,
-        },
-        {
-          id: "41",
-          author: "yasin",
-          avatar: "avatar",
-          title: "4444",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-          searchKey: true,
-        },
-        {
-          id: "51",
-          author: "yasin",
-          avatar: "avatar",
-          title: "5555",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-          searchKey: true,
-        },
-        {
-          id: "61",
-          author: "yasin",
-          avatar: "avatar",
-          title: "66666",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-        },
-        {
-          id: "7",
-          author: "yasin",
-          avatar: "avatar",
-          title: "77777",
-          body: "body",
-          img: "../1.jpg",
-          likes: "10",
-          searchKey: true,
-        },
-      ],
+      memes: [],
     };
   }
 
   render() {
     return (
-      <Router>
+      <React.Fragment>
         <BarMenu search={this.search} showMeme={this.ShowMeme} />
 
         {!this.state.memeShower && (
           <CardExpanded chosedMeme={this.state.chosedMeme} />
         )}
-        {!this.state.memeShower && console.log("successful")}
+
         {this.state.memeShower && (
           <div>
             <Grid container style={{ justifyContent: "center" }}>
@@ -231,6 +189,8 @@ export default class BackToTop extends Component {
                       author={meme.author}
                       img={meme.img}
                       avatar={meme.avatar}
+                      id={meme.id}
+                      increaseLikes={this.increaseLikes}
                     />
                   </Grid>
                 ))}
@@ -238,7 +198,7 @@ export default class BackToTop extends Component {
           </div>
         )}
         <ScrollTop {...this.props} />
-      </Router>
+      </React.Fragment>
     );
   }
   setChosedMeme = (meme) => {
@@ -250,8 +210,16 @@ export default class BackToTop extends Component {
       memeShower: props,
     });
   };
-  ShowMeme = (props) => {
+  ShowMeme = (type) => {
     this.ChangeView(true);
+    this.getMemes(type);
+  };
+
+  getMemes = (type) => {
+    console.log(type);
+    axios.get(`http://localhost:3000/comments`).then((res) => {
+      this.setState({ memes: res.data });
+    });
   };
   search = (event) => {
     var temp = this.state.memes;
@@ -265,5 +233,15 @@ export default class BackToTop extends Component {
       }
     }
     this.setState({ memes: temp });
+  };
+  increaseLikes = (id) => {
+    var result = this.state.memes;
+    for (const meme of result) {
+      if (meme.id === id) {
+        meme.likes++;
+        break;
+      }
+    }
+    this.setState({ memes: result });
   };
 }

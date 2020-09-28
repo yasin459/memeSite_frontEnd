@@ -36,7 +36,7 @@ export default function Meme(props) {
 
   const handleIconButtonClicked = (e) => {
     e.stopPropagation();
-    console.log("icon cliked");
+    props.increaseLikes(props.id);
   };
   // const pic = props.img;
   return (
@@ -47,11 +47,8 @@ export default function Meme(props) {
             {props.avatar}
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        // action={
+        // }
         title={props.title}
         subheader={props.author}
       />
