@@ -30,12 +30,28 @@ export default function CardExpanded({ chosedMeme }, ...props) {
   const styles = useStyles();
   const x = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [comments, setComments] = useState([]);
-  // console.log("padadsad  ", jsons);
   const getComments = () => {
-    // chosedmeme.id
+    console.log("lunched1111");
     Axios.get("http://localhost:3000/cardComments").then((res) => {
+      console.log("lunched222", res.data);
+      // console.log("comments : ", comments);
+      // const cossswsseeeeenanant = res.data;
       setComments(res.data);
     });
+  };
+  const sendComments = async (comment, parent) => {
+    console.log(comment, "  :::  ", parent);
+    const temp = {
+      body: comment,
+      likes: 0,
+      author: "nobody",
+      date: "12/6",
+      children: [],
+    };
+
+    const res = await Axios.post("http://localhost:3000/cardComments", temp);
+    // console.log(res.data);
+    getComments();
   };
   useEffect(() => getComments(), []);
   // getComments();
@@ -58,25 +74,26 @@ export default function CardExpanded({ chosedMeme }, ...props) {
 
       <Box className={styles.box}>
         <ul>
-          <CommentUploader />
+          <CommentUploader parent={null} sendComments={sendComments} />
         </ul>
 
-        <ArrangeComments options={comments} />
+        <ArrangeComments options={comments} sendComments={sendComments} />
       </Box>
     </React.Fragment>
   );
 }
-const ArrangeComments = ({ options }) => {
-  console.log(options);
+const ArrangeComments = (props) => {
+  console.log("this is a test ", props.sendComments);
   return (
     <div>
-      {options &&
-        options.map((option) => (
+      {props.options &&
+        props.options.map((option) => (
           <ul>
             <CommentPaper
-              title={option.title}
+              sendComments={props.sendComments}
+              id={option.id}
               body={option.body}
-              likes={option.likes}
+              like={option.like}
               author={option.author}
               date={option.date}
             />

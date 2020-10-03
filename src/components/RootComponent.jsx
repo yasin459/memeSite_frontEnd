@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  makeStyles,
+} from "@material-ui/core/styles";
 import BackToTop from "./MainBody/SecHeader";
 import MainHeader from "./TopHeader/Header";
 import RTL from "../RTL";
 import Footer from "./Footer/Footer";
+import Box from "@material-ui/core/Box";
+
 const theme = createMuiTheme({
   direction: "rtl",
   primary: {
@@ -20,8 +26,15 @@ const theme = createMuiTheme({
     contrastText: "#000",
   },
 });
+const useStyles = makeStyles((theme) => ({
+  root: {
+    // backgroundColor: "blue",
+    backgroundColor: "#fbe9e7",
+  },
+}));
 
 const RootComponent = () => {
+  const classes = useStyles();
   var [loggedIn, setLoggedIn] = useState(false);
   const changeLoggedIn = (type) => {
     if (type === "signin") {
@@ -33,11 +46,11 @@ const RootComponent = () => {
   return (
     <RTL>
       <MuiThemeProvider theme={theme}>
-        <div>
+        <Box className={classes.root}>
           <MainHeader changeLoggedIn={changeLoggedIn} loggedIn={loggedIn} />
           <BackToTop changeLoggedIn={changeLoggedIn} loggedIn={loggedIn} />
           <Footer />
-        </div>
+        </Box>
       </MuiThemeProvider>
     </RTL>
   );

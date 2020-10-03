@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -7,6 +8,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { Box, Button, Container } from "@material-ui/core";
+import CommentUploader from "./uploadComment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,41 +35,53 @@ const useStyles = makeStyles((theme) => ({
   },
   body: {
     borderRadius: "5px",
+    paddingRight: theme.spacing(3),
+    paddingLeft: theme.spacing(3),
     "& > *": {
       margin: "3px",
     },
+    justifyContent: "space-around",
+
     // backgroundColor: theme.primary.light,
     // backgroundColor: "#c63f17",
+  },
+  voteContainer: {
+    display: "flex",
+    flexDirection: "column",
+
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "5px",
+    padding: "5px",
   },
   voteBox: {
     display: "flex",
     flexDirection: "column",
 
     alignItems: "center",
-    justifyContent: "center",
-
+    justifyContent: "space-between",
+    borderRadius: "5px",
     padding: "5px",
+    backgroundColor: theme.secondary.main,
   },
 }));
 
 export default function CommentPaper(props) {
   const classes = useStyles();
-  var x = parseInt(props.padding, 10);
-  x = x + 100;
-  x += "px";
+  const [openUpload, setOpenUpload] = useState(false);
 
   return (
-    <div className={classes.root} style={{ marginLeft: x }}>
+    <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container spacing={2}>
+        <Grid container>
           <Grid item>
             <ButtonBase className={classes.image}>
               <img className={classes.img} alt="authorPic" src={props.img} />
             </ButtonBase>
           </Grid>
-          <Grid className={classes.body} item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={3}>
-              <Grid item xs>
+          <Grid className={classes.body} item container>
+            <Grid item xs={10} container direction="column" spacing={3}>
+              <Grid item xs={12}>
                 <Typography
                   onClick={() => printShet("salam")}
                   variant="caption"
@@ -77,38 +91,48 @@ export default function CommentPaper(props) {
                   {props.author}
                 </Typography>
               </Grid>
-              <Grid item xs>
-                <Typography
-                  variant="body1"
-                  gutterBottom
-                  style={{ color: "white" }}
-                >
-                  {props.body}
-                </Typography>
+              <Grid item xs={12}>
+                <div style={{ overflow: "hidden" }}>
+                  <Typography
+                    variant="body1"
+                    gutterBottom
+                    style={{ color: "white" }}
+                  >
+                    {props.body}
+                  </Typography>
+                </div>
               </Grid>
-              <Grid item>
+              <Grid item xs={12}>
                 <Typography
+                  onClick={() => setOpenUpload(!openUpload)}
                   variant="subtitle1"
                   style={{ cursor: "pointer", color: "white" }}
                 >
                   reply
                 </Typography>
+                {openUpload && (
+                  <CommentUploader
+                    parent={props.id}
+                    sendComments={props.sendComments}
+                  />
+                )}
               </Grid>
             </Grid>
 
-            <Box className={classes.voteBox}>
+            <Grid item xs={1} className={classes.voteContainer}>
               <Box className={classes.voteBox}>
-                <Typography justify="center">
-                  <ArrowDropUpIcon style={{ color: "white" }} />
+                <ArrowDropUpIcon style={{ color: "white" }} />
+                <Typography
+                  justify="center"
+                  align="center"
+                  style={{ color: "white" }}
+                >
+                  {props.like} 12
                 </Typography>
-                <Typography justify="center" style={{ color: "white" }}>
-                  {props.likes} 12
-                </Typography>
-                <Typography justify="center">
-                  <ArrowDropDownIcon style={{ color: "white" }} />
-                </Typography>
+
+                <ArrowDropDownIcon style={{ color: "white", bottom: "0px" }} />
               </Box>
-            </Box>
+            </Grid>
           </Grid>
         </Grid>
       </Paper>
