@@ -169,7 +169,7 @@ export default class BackToTop extends Component {
     return (
       <React.Fragment>
         <BarMenu search={this.search} showMeme={this.ShowMeme} />
-
+        {/* {this.state.memes} */}
         {!this.state.memeShower && (
           <CardExpanded chosedMeme={this.state.chosedMeme} />
         )}
@@ -183,11 +183,12 @@ export default class BackToTop extends Component {
                   <Grid item xs={12} sm={6} lg={4}>
                     <Meme
                       onClick={() => this.setChosedMeme(meme)}
-                      likes={meme.likes}
+                      likes={meme.like}
                       body={meme.body}
                       title={meme.title}
-                      author={meme.author}
-                      img={meme.img}
+                      author={meme.username}
+                      tag={meme.tag}
+                      img={meme.picture}
                       avatar={meme.avatar}
                       id={meme.id}
                       increaseLikes={this.increaseLikes}
@@ -217,7 +218,11 @@ export default class BackToTop extends Component {
 
   getMemes = (type) => {
     console.log(type);
-    axios.get(`http://localhost:3000/comments`).then((res) => {
+    axios.get(`http://localhost:80/api/meme/${type}`).then((res) => {
+      console.log("input from server : ", res.data);
+      for (const meme of res.data) {
+        meme.searchKey = true;
+      }
       this.setState({ memes: res.data });
     });
   };

@@ -32,12 +32,14 @@ export default function CardExpanded({ chosedMeme }, ...props) {
   const [comments, setComments] = useState([]);
   const getComments = () => {
     console.log("lunched1111");
-    Axios.get("http://localhost:3000/cardComments").then((res) => {
-      console.log("lunched222", res.data);
-      // console.log("comments : ", comments);
-      // const cossswsseeeeenanant = res.data;
-      setComments(res.data);
-    });
+    Axios.get(`http://localhost/api/meme/comment/${chosedMeme.id}`).then(
+      (res) => {
+        console.log("lunched222", res.data);
+        // console.log("comments : ", comments);
+        // const cossswsseeeeenanant = res.data;
+        setComments(res.data);
+      }
+    );
   };
   const sendComments = async (comment, parent) => {
     console.log(comment, "  :::  ", parent);
@@ -60,11 +62,11 @@ export default function CardExpanded({ chosedMeme }, ...props) {
       <Grid container style={{ justifyContent: "center" }}>
         <Grid item lg={7} sm={10} md={9} xs={12}>
           <Meme
-            likes={chosedMeme.likes}
+            likes={chosedMeme.like}
             body={chosedMeme.body}
             title={chosedMeme.title}
-            author={chosedMeme.author}
-            img={chosedMeme.img}
+            author={chosedMeme.username}
+            img={chosedMeme.picture}
             avatar={chosedMeme.avatar}
             id={chosedMeme.id}
             increaseLikes={chosedMeme.increaseLikes}
@@ -74,10 +76,14 @@ export default function CardExpanded({ chosedMeme }, ...props) {
 
       <Box className={styles.box}>
         <ul>
-          <CommentUploader parent={null} sendComments={sendComments} />
+          <CommentUploader parent={-1} sendComments={sendComments} />
         </ul>
 
-        <ArrangeComments options={comments} sendComments={sendComments} />
+        <ArrangeComments
+          parent={-1}
+          options={comments}
+          sendComments={sendComments}
+        />
       </Box>
     </React.Fragment>
   );
@@ -90,15 +96,21 @@ const ArrangeComments = (props) => {
         props.options.map((option) => (
           <ul>
             <CommentPaper
+              parent={props.parent}
               sendComments={props.sendComments}
               id={option.id}
               body={option.body}
               like={option.like}
               author={option.author}
               date={option.date}
+              avatar={option.avatar}
             />
-            {option.children.length > 0 && (
-              <ArrangeComments options={option.children} />
+            {option.replies && option.replies.length > 0 && (
+              <ArrangeComments
+                parent={option.id}
+                options={option.replies}
+                sendComments={props.sendComments}
+              />
             )}
           </ul>
         ))}

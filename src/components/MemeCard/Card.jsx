@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -15,6 +15,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,11 +35,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Meme(props) {
   const classes = useStyles();
-
+  const [image, setImage] = useState();
   const handleIconButtonClicked = (e) => {
     e.stopPropagation();
     props.increaseLikes(props.id);
   };
+
   // const pic = props.img;
   return (
     <Card onClick={props.onClick} className={classes.root}>
@@ -55,7 +57,7 @@ export default function Meme(props) {
       />
       <CardMedia
         className={classes.media}
-        image={props.img}
+        image={`http://localhost/${props.img}`}
         title="Paella dish"
       />
       <CardContent>
