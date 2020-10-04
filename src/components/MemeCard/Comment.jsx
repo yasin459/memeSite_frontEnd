@@ -13,7 +13,7 @@ import CommentUploader from "./uploadComment";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin: 3,
+    // margin: 3,
   },
   paper: {
     backgroundColor: theme.primary.main,

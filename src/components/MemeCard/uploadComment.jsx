@@ -14,7 +14,7 @@ import Axios from "axios";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(4),
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
     backgroundColor: theme.primary.main,
     color: "white",
     "& > *": {

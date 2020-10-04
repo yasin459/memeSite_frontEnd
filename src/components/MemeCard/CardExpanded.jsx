@@ -88,30 +88,56 @@ export default function CardExpanded({ chosedMeme }, ...props) {
 }
 const ArrangeComments = (props) => {
   console.log("this is a test ", props.sendComments);
+  const SetCommnetPaper = (option) => {
+    if (props.parent === -1) {
+      return (
+        <React.Fragment>
+          <CommentPaper
+            parent={props.parent}
+            sendComments={props.sendComments}
+            id={option.id}
+            body={option.body}
+            like={option.like}
+            author={option.author}
+            date={option.date}
+            avatar={option.avatar}
+          />
+          {option.replies && option.replies.length > 0 && (
+            <ArrangeComments
+              parent={option.id}
+              options={option.replies}
+              sendComments={props.sendComments}
+            />
+          )}
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <ul>
+          <CommentPaper
+            parent={props.parent}
+            sendComments={props.sendComments}
+            id={option.id}
+            body={option.body}
+            like={option.like}
+            author={option.author}
+            date={option.date}
+            avatar={option.avatar}
+          />
+          {option.replies && option.replies.length > 0 && (
+            <ArrangeComments
+              parent={option.id}
+              options={option.replies}
+              sendComments={props.sendComments}
+            />
+          )}
+        </ul>
+      );
+    }
+  };
   return (
     <div>
-      {props.options &&
-        props.options.map((option) => (
-          <ul>
-            <CommentPaper
-              parent={props.parent}
-              sendComments={props.sendComments}
-              id={option.id}
-              body={option.body}
-              like={option.like}
-              author={option.author}
-              date={option.date}
-              avatar={option.avatar}
-            />
-            {option.replies && option.replies.length > 0 && (
-              <ArrangeComments
-                parent={option.id}
-                options={option.replies}
-                sendComments={props.sendComments}
-              />
-            )}
-          </ul>
-        ))}
+      {props.options && props.options.map((option) => SetCommnetPaper(option))}
     </div>
   );
 };
