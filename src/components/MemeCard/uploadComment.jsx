@@ -23,12 +23,21 @@ const useStyles = makeStyles((theme) => ({
   },
   typography: {},
   button: {
+    width: "10%",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
+
     color: "white",
     backgroundColor: theme.secondary.dark,
   },
   body: {
-    width: "98%",
-    padding: "2%",
+    width: "90%",
+    padding: theme.spacing(2.5),
+
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
     borderRadius: theme.spacing(0.5),
     backgroundColor: theme.secondary.light,
     // minHeight: theme.spacing(9),
@@ -37,6 +46,16 @@ const useStyles = makeStyles((theme) => ({
     "&::placeholder": {
       //   textOverflow: "ellipsis !important",
       color: "yellow",
+    },
+  },
+  form: {
+    display: "flex",
+    justifyContent: "center",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+    },
+    "& > *": {
+      margin: theme.spacing(0.3),
     },
   },
 }));
@@ -52,13 +71,16 @@ export default function CommentUploader(props) {
       <Typography className={classes.typography} variant="h4">
         دیدگاهت رو بگو :)
       </Typography>
-      <Form onSubmit={() => props.sendComments(commentBody, props.parent)}>
+      <Form
+        onSubmit={() => props.sendComments(commentBody, props.parent)}
+        className={classes.form}
+      >
         <InputBase
           className={classes.body}
           value={commentBody}
           onChange={onChangeBody}
           multiline
-          rowMin="2"
+          rows="2"
           rowsMax="4"
           placeholder="نظر خود را اینجا وارد کنید"
           InputProps={{ classes: { input: classes.bodyInput } }}

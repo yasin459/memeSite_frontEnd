@@ -75,9 +75,7 @@ export default function CardExpanded({ chosedMeme }, ...props) {
       </Grid>
 
       <Box className={styles.box}>
-        <ul>
-          <CommentUploader parent={-1} sendComments={sendComments} />
-        </ul>
+        <CommentUploader parent={-1} sendComments={sendComments} />
 
         <ArrangeComments
           parent={-1}

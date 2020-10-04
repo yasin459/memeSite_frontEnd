@@ -18,14 +18,22 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.primary.main,
 
-    // padding: theme.spacing(2),
+    padding: theme.spacing(2),
     marginTop: "10px",
     marginBottom: "10px",
-    // maxWidth: 500,
+  },
+  paperGrid: {
+    justifyContent: "space-around",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+    },
   },
   image: {
-    width: 128,
-    height: 128,
+    width: "100%",
+    height: "100%",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
   },
   img: {
     margin: "auto",
@@ -35,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
   },
   body: {
     borderRadius: "5px",
-    paddingRight: theme.spacing(3),
-    paddingLeft: theme.spacing(3),
+    // paddingRight: theme.spacing(3),
+    // paddingLeft: theme.spacing(3),
     "& > *": {
       margin: "3px",
     },
@@ -51,8 +59,8 @@ const useStyles = makeStyles((theme) => ({
 
     alignItems: "center",
     justifyContent: "center",
-    margin: "5px",
-    padding: "5px",
+    // margin: "5px",
+    // padding: "5px",
   },
   voteBox: {
     display: "flex",
@@ -73,14 +81,14 @@ export default function CommentPaper(props) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container>
-          <Grid item>
+        <Grid container className={classes.paperGrid}>
+          <Grid item xs={12} sm={1} className={classes.imgGrid}>
             <ButtonBase className={classes.image}>
               <img className={classes.img} alt="authorPic" src={props.img} />
             </ButtonBase>
           </Grid>
-          <Grid className={classes.body} item container>
-            <Grid item xs={10} container direction="column" spacing={3}>
+          <Grid xs={12} sm={10} className={classes.body} item container>
+            <Grid item xs={10} container flexDirection="column">
               <Grid item xs={12}>
                 <Typography
                   onClick={() => printShet("salam")}
