@@ -1,26 +1,26 @@
 import React, { Component } from "react";
-import Input from "../Components/Input";
+import { Input, InputBase, TextField } from "@material-ui/core";
 import Bar from "../Components/Bar";
 var zxcvbn = require("zxcvbn");
 let strengthText = [
   {
-    text: "Very Weak ☹",
+    text: "خیلی ضعیف ☹",
     bgColor: "#e40808",
   },
   {
-    text: "Weak ☹",
+    text: "ضعیف ☹",
     bgColor: "#e40808",
   },
   {
-    text: "Medium ☹",
+    text: "معمولی ☹",
     bgColor: "#ffd800",
   },
   {
-    text: "Strong ☺",
+    text: "قوی ☺",
     bgColor: "#2cb117",
   },
   {
-    text: "Very Strong ☻",
+    text: "بسیار قوی ☻",
     bgColor: "#2cb117",
   },
 ];
@@ -30,7 +30,7 @@ class Password extends Component {
     this.state = {
       text: "",
       suggestion: null,
-      result: "Enter Your Password",
+      result: "لطفا رمز عبور خود را وارد کنید",
       bgColor: "#e40808",
       barWidth: 0,
       inputWidth: "100%",
@@ -40,11 +40,22 @@ class Password extends Component {
     return (
       <React.Fragment>
         <div>
-          <Input
-            inputWidth={this.state.inputWidth}
+          {/* <Input
+            i*nputWidth={this.state.inputWidth}
             type="password"
             value={this.state.text}
             onChange={this.print}
+          /> */}
+          <TextField
+            id={"input"}
+            type="password"
+            value={this.state.text}
+            onChange={this.print}
+            style={{ width: this.state.inputWidth }}
+            // variant="outline"
+            // helperText="رمز"
+            // variant="outlined"
+            placeholder="رمز..."
           />
           <Bar
             width={this.state.barWidth}
@@ -109,7 +120,7 @@ class Password extends Component {
       this.setState({ suggestion: string });
     }
     if (result.score === 0 && text.length === 0) {
-      this.setState({ width: 0 });
+      this.setState({ barWidth: 0 });
     } else {
       // const width = (result.score + 1) * 140;
       let width = (result.score + 1) * 20;
@@ -123,24 +134,24 @@ class Password extends Component {
     if (result.score === 0) {
       // console.log(text.length);
       if (text.length === 0) {
-        resultTxt = "Enter Your Password";
+        resultTxt = "لطفا رمز عبور خود را وارد کنید";
         // this.setState({ result:  });
       } else {
-        resultTxt = "Very Weak ☹";
+        resultTxt = "خیلی ضعیف ☹";
         // this.setState({ result: "Very Weak ☹" });
       }
     } else if (result.score === 1) {
-      resultTxt = "Weak ☹";
+      resultTxt = "ضعیف ☹";
 
       // this.setState({ result: "Weak ☹" });
     } else if (result.score === 2) {
-      resultTxt = "Medium ☹";
+      resultTxt = "معمولی ☹";
       // this.setState({ result: "Medium ☹" });
     } else if (result.score === 3) {
-      resultTxt = "Strong ☺";
+      resultTxt = "قوی ☺";
       // this.setState({ result: "Strong ☺" });
     } else if (result.score === 4) {
-      resultTxt = "Very Strong ☻";
+      resultTxt = "بسیار قوی ☻";
       // this.setState({ result: "Very Strong ☻" });
     }
     // console.log("end of ifs ,before setcolor : ", this.state.result);

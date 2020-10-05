@@ -29,7 +29,6 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -46,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   container: {
+    direction: "rtl",
     backgroundColor: "white",
   },
 }));
@@ -69,18 +69,6 @@ export default function SignUp(props) {
           onSubmit={() => props.changeLoggedIn("signup")}
         >
           <Grid container spacing={2}>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -90,6 +78,7 @@ export default function SignUp(props) {
                 label="نام کاربری"
                 name="username"
                 autoComplete="lname"
+                InputLabelProps={{ direction: "rtl" }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,23 +94,13 @@ export default function SignUp(props) {
             </Grid>
             <Grid item xs={12}>
               <Password />
-              {/* <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="رمز ورود"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              /> */}
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Button
             type="submit"

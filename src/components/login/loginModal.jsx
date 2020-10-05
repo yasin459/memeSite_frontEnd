@@ -9,6 +9,7 @@ import SignIn from "./signIn";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
+    direction: "inherit",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -36,7 +37,7 @@ export default function Login(props) {
   };
   const InOrUp = () => {
     return (
-      <div>
+      <div dir="inherit">
         {!view && (
           <SignUp
             changeLoggedIn={props.changeLoggedIn}
