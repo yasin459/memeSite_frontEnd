@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import SignIn from "./signIn";
+import Password from "./password_field/Containers/Password";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -60,7 +61,7 @@ export default function SignUp(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          ثبت نام{" "}
         </Typography>
         <form
           className={classes.form}
@@ -68,7 +69,7 @@ export default function SignUp(props) {
           onSubmit={() => props.changeLoggedIn("signup")}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
                 name="firstName"
@@ -79,15 +80,15 @@ export default function SignUp(props) {
                 label="First Name"
                 autoFocus
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+            </Grid> */}
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
+                id="username"
+                label="نام کاربری"
+                name="username"
                 autoComplete="lname"
               />
             </Grid>
@@ -97,22 +98,23 @@ export default function SignUp(props) {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="ایمیل"
                 name="email"
                 autoComplete="email"
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <Password />
+              {/* <TextField
                 variant="outlined"
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="رمز ورود"
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
+              /> */}
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
