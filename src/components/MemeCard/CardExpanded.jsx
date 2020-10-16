@@ -4,6 +4,7 @@ import React, { Component, useEffect, useState } from "react";
 import Meme from "./Card";
 import CommentPaper from "./Comment";
 import CommentUploader from "./uploadComment";
+import { useLocation } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   fixTry1: {
     width: "40%",
@@ -26,20 +27,19 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: theme.primary.dark,
   },
 }));
-export default function CardExpanded({ chosedMeme }, ...props) {
+export default function CardExpanded(props) {
   const styles = useStyles();
-  const x = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [comments, setComments] = useState([]);
+  const { state, pathname } = useLocation();
+  const { meme } = state;
+
   const getComments = () => {
-    console.log("lunched1111");
-    Axios.get(`http://localhost/api/meme/comment/${chosedMeme.id}`).then(
-      (res) => {
-        console.log("lunched222", res.data);
-        // console.log("comments : ", comments);
-        // const cossswsseeeeenanant = res.data;
-        setComments(res.data);
-      }
-    );
+    Axios.get(`http://localhost/api/meme/comment/${meme.id}`).then((res) => {
+      console.log("lunched222", res.data);
+      // console.log("comments : ", comments);
+      // const cossswsseeeeenanant = res.data;
+      setComments(res.data);
+    });
   };
   const sendComments = async (comment, parent) => {
     console.log(comment, "  :::  ", parent);
@@ -62,14 +62,14 @@ export default function CardExpanded({ chosedMeme }, ...props) {
       <Grid container style={{ justifyContent: "center" }}>
         <Grid item lg={7} sm={10} md={9} xs={12}>
           <Meme
-            likes={chosedMeme.like}
-            body={chosedMeme.body}
-            title={chosedMeme.title}
-            author={chosedMeme.username}
-            img={chosedMeme.picture}
-            avatar={chosedMeme.avatar}
-            id={chosedMeme.id}
-            increaseLikes={chosedMeme.increaseLikes}
+            likes={meme.like}
+            body={meme.body}
+            title={meme.title}
+            author={meme.username}
+            img={meme.picture}
+            avatar={meme.avatar}
+            id={meme.id}
+            increaseLikes={meme.increaseLikes}
           />
         </Grid>
       </Grid>

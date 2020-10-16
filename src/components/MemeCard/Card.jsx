@@ -32,7 +32,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: red[500],
   },
 }));
-
+// function RedirectTosingleMemePage({ meme }) {
+//   console.log("ajaab");
+//   // const res =
+//   return (
+//     <Redirect
+//       to={{
+//         pathname: "singleMeme",
+//         state: {
+//           meme: meme,
+//         },
+//       }}
+//     />
+//   );
+// }
 export default function Meme(props) {
   const classes = useStyles();
   const [image, setImage] = useState();

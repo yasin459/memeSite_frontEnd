@@ -5,6 +5,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import RTL from "../../RTL";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  useHistory,
+  Redirect,
+} from "react-router-dom";
+
 export default function MemeMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl2, setAnchorEl2] = React.useState(null);
@@ -27,6 +33,23 @@ export default function MemeMenu(props) {
   const theme = createMuiTheme({
     direction: "rtl",
   });
+  const MenuButton = ({ type, text }) => {
+    const history = useHistory();
+    return (
+      <i
+        onClick={() => {
+          history.push({
+            pathname: `${type}`,
+            state: {
+              searchText: "empty",
+            },
+          });
+        }}
+      >
+        {text}
+      </i>
+    );
+  };
   return (
     <React.Fragment>
       <Button
@@ -43,8 +66,8 @@ export default function MemeMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => props.showMeme("last")}>
-          جدید ترین میم ها
+        <MenuItem>
+          <MenuButton text="جدید ترین میم ها" type="last" />
         </MenuItem>
 
         <MenuItem>
@@ -64,21 +87,23 @@ export default function MemeMenu(props) {
             anchorOrigin={{ vertical: "center", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "right" }}
           >
-            <MenuItem onClick={() => props.showMeme("top/day")}>
-              بهترین روز
+            <MenuItem>
+              <MenuButton text="بهترین روز" type="top/day" />
             </MenuItem>
 
-            <MenuItem onClick={() => props.showMeme("top/week")}>
-              بهترین هفته
+            <MenuItem>
+              <MenuButton text="بهترین هفته" type="top/week" />
             </MenuItem>
 
-            <MenuItem onClick={() => props.showMeme("top/ever")}>
-              بهترین از ابتدا
+            <MenuItem>
+              <MenuButton text="بهترین از ابتدا" type="top/ever" />
             </MenuItem>
           </Menu>
         </MenuItem>
 
-        <MenuItem onClick={() => props.showMeme("random")}>میم رندوم</MenuItem>
+        <MenuItem>
+          <MenuButton text="میم رندوم" type="random" />
+        </MenuItem>
       </Menu>
     </React.Fragment>
   );
